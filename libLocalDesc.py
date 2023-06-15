@@ -49,9 +49,12 @@ def RootSIFT(img1,img2, MatchingThres = 0, knn_num = 2, Rooted = True, GFilter=1
     KPlist2, sift_des2 = ComputeSIFTKeypoints(img2, Desc = True)
     Identity = np.float32([[1, 0, 0], [0, 1, 0]])
     h, w = img1.shape[:2]
+
     KPlist1, sift_des1, temp = Filter_Affine_In_Rect(KPlist1,Identity,[0,0],[w,h], desc_list = sift_des1)
+
     h, w = img2.shape[:2]
     KPlist2, sift_des2, temp = Filter_Affine_In_Rect(KPlist2,Identity,[0,0],[w,h], desc_list = sift_des2)
+
     if Rooted:
         sift_des1 = np.sqrt(sklearn.preprocessing.normalize(sift_des1, norm='l2',axis=1))
         sift_des2 = np.sqrt(sklearn.preprocessing.normalize(sift_des2, norm='l2',axis=1))
